@@ -3,8 +3,8 @@ const UserService = require("../services/user-service");
 const userService = new UserService();
 
 const create = async (req, res) => {
-  const {email, password }= req.body;
-  
+  const {email, password} = req.body;
+
   try {
     const newUser = await userService.create({
       email: email,
@@ -26,4 +26,26 @@ const create = async (req, res) => {
     });
   }
 };
-module.exports = {create};
+
+const signIn = async (req, res) => {
+  const {email, password} = req.body;
+  try {
+    const response = await userService.signIn(email, password);
+    return res.status(200).send({
+      data: response,
+      message: "Successfully signed in",
+      success: true,
+      err: {},
+    });
+  } catch (error) {
+    return res.status(500).send({
+      data: {},
+      message: "something went wrong",
+      success: false,
+      err: {error},
+    });
+  }
+};
+
+
+module.exports = {create, signIn};
