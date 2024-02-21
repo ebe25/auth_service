@@ -37,7 +37,7 @@ class UserService {
       return newUser;
     } catch (error) {
       console.log("Something wrong with the service layer");
-      throw {error:error};
+      throw {error: error};
     }
   }
 
@@ -59,7 +59,26 @@ class UserService {
       return newAuthToken;
     } catch (error) {
       console.log("Something wrong with signIn fn service layer");
-      
+      throw error;
+    }
+  }
+
+  async isAuthenticated(token) {
+    try {
+      const response = this.verifyToken(token);
+      if (!response) {
+        throw {error: "Invalid token"};
+      }
+      //find a user with the email and check if te user is deleted or not
+      const user = await this.userRepo.getUserbyEmail(response.email);
+      const userId = await this.userRepo.getUserbyId(user.id);
+      if (!userId) {
+        throw {error: "User not found"};
+      }
+      return userId.id;
+    } catch (error) {
+      console.log("Something wrong with auth fn service layer", error);
+      throw {error};
     }
   }
 }
