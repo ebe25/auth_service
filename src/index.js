@@ -2,6 +2,7 @@ const express = require("express");
 const {PORT} = require("../src/config/server");
 const authenticateDBConnection = require("../src/config/db");
 const v1Routes = require("../src/routes/index");
+const db = require("./models/index");
 const prepareAndStartUpServer = async () => {
   try {
     const app = express();
@@ -12,6 +13,10 @@ const prepareAndStartUpServer = async () => {
       console.log(`Sever running on the port ${PORT}`);
     });
     app.use("/api", v1Routes);
+    if (process.env.DB_SYNC) {
+      db.sequelize.sync({alter: true});
+      console.log("All models were synchronized successfully.");
+    }
   } catch (error) {
     throw {error};
   }

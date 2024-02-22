@@ -19,5 +19,5 @@ const registerRandomUsers = (seedNumber) => {
     updatedAt: new Date(),
   }));
 };
-
+console.log(process.env.NODE_ENV);
 module.exports = {hashPassword, registerRandomUsers};

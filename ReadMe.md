@@ -19,3 +19,8 @@
             --return the user's Id
 
     2. Authorization
+        More or less it is like a role based access
+        using roles:
+            -ADMIN
+            -CUSTOMER
+            -AUTHORITY

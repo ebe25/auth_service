@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsToMany(models.Role, {through: "User_Roles"});
     }
   }
   User.init(
@@ -37,7 +38,6 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.beforeCreate(async (user, options) => {
     const hashedPassword = await hashPassword(user.password);
-    console.log(hashedPassword);
     user.password = hashedPassword;
   });
   return User;
