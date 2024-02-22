@@ -3,6 +3,8 @@ const {PORT} = require("../src/config/server");
 const authenticateDBConnection = require("../src/config/db");
 const v1Routes = require("../src/routes/index");
 const db = require("./models/index");
+const {User, Role} = require("./models/index");
+// const role = require("./models/role");
 const prepareAndStartUpServer = async () => {
   try {
     const app = express();

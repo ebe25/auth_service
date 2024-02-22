@@ -7,6 +7,19 @@ const userAuth = (req, res, next) => {
       data: {},
     });
   }
-  return next();
+  next();
 };
-module.exports = {userAuth};
+
+const isAdminAuth = (req, res, next) => {
+  if (!req.body.id) {
+    return res.status(400).json({
+      success: false,
+      message: "Please provide user id for admin authorization",
+      err: "user Id not provided",
+      data: {},
+    });
+  }
+
+  next();
+};
+module.exports = {userAuth, isAdminAuth};

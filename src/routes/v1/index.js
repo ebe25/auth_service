@@ -1,9 +1,11 @@
 const express = require("express");
 const UserController = require("../../controllers/user");
-const {AuthUserValidator} = require("../../middlewares/index");
+const {AuthUserValidators} = require("../../middlewares/index");
 const router = express.Router();
 
-router.post("/signup", AuthUserValidator.userAuth , UserController.create);
-router.post("/signin", AuthUserValidator.userAuth, UserController.signIn);
+router.post("/signup", AuthUserValidators.userAuth, UserController.create);
+router.post("/signin", AuthUserValidators.userAuth, UserController.signIn);
 router.get("/isAuthenticated", UserController.isAuthenticated);
+router.get("/isAdmin", AuthUserValidators.isAdminAuth, UserController.isAdmin);
+
 module.exports = router;

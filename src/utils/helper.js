@@ -7,7 +7,6 @@ const hashPassword =  async(textPassword) => {
     const password =  await bcrypt.hash(textPassword, SALT_ROUNDS);
     return password;
   } catch (error) {
-    console.log("error hashing password");
     throw error;
   }
 };
@@ -19,5 +18,4 @@ const registerRandomUsers = (seedNumber) => {
     updatedAt: new Date(),
   }));
 };
-console.log(process.env.NODE_ENV);
 module.exports = {hashPassword, registerRandomUsers};

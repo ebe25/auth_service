@@ -1,5 +1,5 @@
 
 
 module.exports = {
-  AuthUserValidator: require("./userAuth"),
+  AuthUserValidators: require("./userAuth"),
 };

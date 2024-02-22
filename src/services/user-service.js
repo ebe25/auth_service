@@ -81,5 +81,15 @@ class UserService {
       throw {error};
     }
   }
+
+  async isAdmin(userId) {
+    try {
+      const response = await this.userRepo.isAdmin(userId);
+      return response;
+    } catch (error) {
+      console.log("Something wrong with admin fn service layer", error);
+      throw {error};
+    }
+  }
 }
 module.exports = UserService;
